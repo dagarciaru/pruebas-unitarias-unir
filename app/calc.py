@@ -1,5 +1,5 @@
 import app
-
+import math
 
 class InvalidPermissions(Exception):
     pass
@@ -31,7 +31,18 @@ class Calculator:
     def power(self, x, y):
         self.check_types(x, y)
         return x ** y
+       
+    def square_root(self, x):#Función raíz cuadrada
+        self.check_types(x, 1)
+        if x < 0:#valida si los números son positivos para sacarle la raíz
+            raise ValueError("Square root is not defined for negative numbers")
+        return math.sqrt(x)
 
+    def logarithm(self, x):#Función logarítmo en base 10
+        self.check_types(x, 1)
+        if x <= 0:#valida si los números son positivos para aplicarle el logarítmo
+            raise ValueError("Logarithm is not defined for non-positive numbers")
+        return math.log10(x)
     def check_types(self, x, y):
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
             raise TypeError("Parameters must be numbers")
@@ -40,4 +51,5 @@ class Calculator:
 if __name__ == "__main__":  # pragma: no cover
     calc = Calculator()
     result = calc.add(2, 2)
+    result2 = calc.logarithm(100)
     print(result)
